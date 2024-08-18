@@ -37,3 +37,34 @@ static/: Directory containing static assets like CSS, JavaScript, and images.
 Collaboration:
 This project is developed by a team of two collaborators, each responsible for different sections of the website. We use GitHub Flow to manage our development process, ensuring that each contributor works on a separate feature branch and submits changes via pull requests.
 
+Project Setup and Collaboration Guide
+
+Clone the Repository
+git clone https://github.com/Loisyy/eco_fashion_guide.git
+cd repository
+
+Create a New Branch
+git checkout -b your-feature-branch
+Make Changes, Commit, and Push
+
+Work on your feature or page, commit your changes:
+git add .
+git commit -m "Description of your changes"
+Push to the remote repository:
+git push origin your-feature-branch
+
+Naming conventions for branches:
+
+home-page: For work on index.html.
+about-page: For work on about.html.
+auth-pages: For work on sign_in.html and sign_up.html.
+styling-tips-page: For work on styling.html.
+brands-page: For work on brands.html.
+e.g git push origin home-page
+
+
+
+Create a Pull Request
+
+Navigate to the main repository on GitHub.
+Open a pull request (PR) from your branch to the main branch.
