@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" alt="Hero Image">
+    <div class="hero-text">
+        <h1>Welcome to the Eco-Friendly Fashion Guide</h1>
+        <p>Discover stylish and sustainable fashion choices for a greener future.</p>
+        <a href="{{ url_for('tips') }}" class="cta-button">Get Started</a>
+    </div>
+</div>
+{% endblock %}
