@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, request, jsonify, render_template
+from .database import create_user, get_user
 
 app = Flask(__name__)
 
