@@ -2,7 +2,7 @@
 from pymongo import MongoClient
 
 def get_db():
-    client = MongoClient('mongodb://admin:password@localhost:27017/')
+    client = MongoClient('mongodb://localhost:27017/')
     db = client['ecofashion']
     return db
 
