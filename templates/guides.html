@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Fashion</title>
+    <style type="text/css">
+        *
+        {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Authors' Articles</h1>
+                <div class="author-section">
+                    <h2>Author Name</h2>
+                    <p>Joined: 2022-01-01</p>
+                    <p>Post: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+                    <div class="icons">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        <i class="bi bi-hand-thumbs-down"></i>
+                    </div>
+                    <h3>Comments</h3>
+                    <ul>
+                        <li>Comment 1</li>
+                        <li>Comment 2</li>
+                    </ul>
+                    <div class="author-image">
+                        <img src="author-image.jpg" alt="Author Image">
+                    </div>
+                    <div class="article-photos">
+                        <h4>Article Photos</h4>
+                        <div class="photo-gallery">
+                            <img src="photo1.jpg" alt="Photo 1">
+                            <img src="photo2.jpg" alt="Photo 2">
+                            <img src="photo3.jpg" alt="Photo 3">
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat the author-section div for each author -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+</html>
