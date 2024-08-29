@@ -1,82 +1,41 @@
-// scripts.js
+const modal = document.getElementById('signup-modal');
+const form = document.querySelector("#signup-btn");
+if (form) {
+// Add event listener to the signup button
+form.addEventListener('click', function(event) {
+  // Prevent default form submission
+  event.preventDefault();
+})
 
-// Toggle navigation menu for mobile devices
-function toggleMenu() {
-  const nav = document.querySelector("nav");
-  nav.classList.toggle("open");
-}
+ // Get the form data
+ const formData = new FormData(form);
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Event listener for the mobile menu toggle button
-  const menuToggle = document.querySelector(".menu-toggle");
-  if (menuToggle) {
-    menuToggle.addEventListener("click", toggleMenu);
-  }
-
-  // Example form validation for sign-up/sign-in pages
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", (event) => {
-      const password = form.querySelector('input[name="password"]');
-      const confirmPassword = form.querySelector(
-        'input[name="confirm_password"]'
-      );
-
-      if (
-        password &&
-        confirmPassword &&
-        password.value !== confirmPassword.value
-      ) {
-        event.preventDefault();
-        alert("Passwords do not match!");
-      }
-    });
-  }
+  // Send the form data to the server
+  fetch('/signup', {
+    method: 'POST',
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    // Handle the response data
+    console.log(data);
+    // Close the modal
+    modal.classList.remove('show');
+    // Show a success message
+    alert('Signup successful!');
+     // Redirect to the dashboard page
+     window.location.href = '/dashboard';
+})
+.catch(error => {
+    // Handle the error
+    console.error(error);
+    // Show an error message
+    alert('Signup failed!');
 });
 
-// Your JSON data
-const form = document.querySelector("form");
-if (form) {
-  form.addEventListener("submit", (event) => {
-    const password = form.querySelector('input[name="password"]');
-    const confirmPassword = form.querySelector('input[name="confirm_password"]');
-    
-
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      event.preventDefault();
-      alert("Passwords do not match!");
-    } else if (password && confirmPassword && password.value === confirmPassword.value) {
-      event.preventDefault(); // Prevent the default form submission
-      
-    //Create a FormData object to capture the form data
-    const formData = new FormData(form);
-
-// Set up options for the fetch request
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' //Set content type to JSON
-  },
-        body: JSON.stringify(formData)};
-
-// Make the fetch request with the provided options
-    fetch('/sign_up', options)
-        .then(response => {
-    // Check if the request was successful
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    // Parse the response as JSON
-    return response.json();
-  })
-  .then(data => {
-    // Handle the JSON data
-    alert(data);
-  })
-  .catch(error => {
-    // Handle any errors that occurred during the fetch
-    console.error('Fetch error:', error);
-  })
+// Add event listener to the modal close button
+document.querySelector('.btn-close').addEventListener('click', function() {
+  // Close the modal
+  modal.classList.remove('show');
+});
 }
-})
-};
