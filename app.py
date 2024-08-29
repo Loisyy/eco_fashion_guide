@@ -11,29 +11,6 @@ def index():
 def about():
     return render_template('about.html')
 
-@app.route('/tips')
-def tips():
-    return render_template('tips.html')
-
-@app.route('/brands')
-def brands():
-    return render_template('brands.html')
-
-@app.route('/materials')
-def materials():
-    return render_template('materials.html')
-
-@app.route('/diy')
-def diy():
-    return render_template('diy.html')
-
-@app.route('/styling')
-def styling():
-    return render_template('styling.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
 
 @app.route('/sign_in')
 def sign_in():
@@ -43,15 +20,17 @@ def sign_in():
 def sign_up():
     if request.method == 'POST':
         # Extract form data
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
+        username = request.form.get('Full name')
+        email = request.form.get('Email')
+        password = request.form.get('Password')
+        phone_number = request.form.get('Phone number')
 
         # Create a new user document
         userdata = {
-            "username": username,
-            "email": email,
-            "password": password  # You should hash the password before storing it
+            "Full name": username,
+            "Email": email,
+            "Password": password, # You should hash the password before storing it
+            "Phone number": phone_number
         }
         user_id = create_user(userdata)
 
@@ -59,6 +38,10 @@ def sign_up():
 
     # Render the signup page for GET requests
     return render_template('sign_up.html')
+
+    @app.route('/dashboard', methods=['GET', 'POST'])
+    def dashboard():
+        return render_template('dashboard.html')
 
 
 
