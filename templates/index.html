@@ -9,7 +9,7 @@
         {
             margin: 0px;
             padding: 0px;
-        }
+        }       
     </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
@@ -118,7 +118,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="email" required>
+                            <input type="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone Number</label>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" id="signup-btn">Sign up</button>
+                    <button type="button" class="btn btn-danger" id="signup-btn">Sign up</button>
                 </div>
     <!-- Response Modal window -->
     <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">

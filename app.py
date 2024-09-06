@@ -1,10 +1,30 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
+from werkzeug.security import generate_password_hash, check_password_hash
 from .database import create_user, get_user
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        data = request.get_json(force=True)
+        full_name = data['Full name']
+        email = data['Email']
+        password = data['Password']  # You should hash the password before storing it
+        phone = data['Phone number']
+
+          # Create a new user document
+        userdata = {
+            "Full name": full_name,
+            "Email": email,
+            "Password": password, # You should hash the password before storing it
+            "Phone number": phone
+        }
+        user_id = create_user(userdata)
+
+         # Redirect to a success page or show a success message
+        return redirect('/dashboard')
+
     return render_template('index.html')
 
 @app.route('/about')
@@ -16,32 +36,11 @@ def about():
 def sign_in():
     return render_template('sign_in.html')
 
-@app.route('/sign_up', methods=['GET', 'POST'])
-def sign_up():
-    if request.method == 'POST':
-        # Extract form data
-        username = request.form.get('Full name')
-        email = request.form.get('Email')
-        password = request.form.get('Password')
-        phone_number = request.form.get('Phone number')
 
-        # Create a new user document
-        userdata = {
-            "Full name": username,
-            "Email": email,
-            "Password": password, # You should hash the password before storing it
-            "Phone number": phone_number
-        }
-        user_id = create_user(userdata)
 
-        return jsonify({"message": "User created successfully"}), 201
-
-    # Render the signup page for GET requests
-    return render_template('sign_up.html')
-
-    @app.route('/dashboard', methods=['GET', 'POST'])
-    def dashboard():
-        return render_template('dashboard.html')
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 
 

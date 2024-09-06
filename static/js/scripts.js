@@ -1,41 +1,54 @@
-const modal = document.getElementById('signup-modal');
-const form = document.querySelector("#signup-btn");
-if (form) {
-// Add event listener to the signup button
-form.addEventListener('click', function(event) {
-  // Prevent default form submission
-  event.preventDefault();
-})
+document.addEventListener('DOMContentLoaded', function() {
+  const formElement = document.getElementById('signup-form');
+  const signupButton = document.getElementById('signup-btn');
 
- // Get the form data
- const formData = new FormData(form);
+  // Ensure that the signup button exists
+  if (signupButton && formElement) {
+      // Add event listener to the signup button
+      signupButton.addEventListener('click', function(event) {
+          console.log("Signup button clicked");  // Debugging to confirm the click event is working
 
-  // Send the form data to the server
-  fetch('/signup', {
-    method: 'POST',
-    body: formData
-})
-.then(response => response.json())
-.then(data => {
-    // Handle the response data
-    console.log(data);
-    // Close the modal
-    modal.classList.remove('show');
-    // Show a success message
-    alert('Signup successful!');
-     // Redirect to the dashboard page
-     window.location.href = '/dashboard';
-})
-.catch(error => {
-    // Handle the error
-    console.error(error);
-    // Show an error message
-    alert('Signup failed!');
+          // Prevent default form submission behavior
+          event.preventDefault();
+      // Get the form field values using their IDs
+      const fullName = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const phone = document.getElementById('phone').value;
+
+
+      //Hash the password
+      hashed_password = generate_password_hash(password)
+
+      // Create a JSON object with the form field values
+      const userData = {
+        'Full name': fullName,
+        'Email': email,
+        'Password': password,
+        'Phone number': phone
+      };
+          // Send the form data to the Flask server using fetch
+          fetch('/', {
+              method: 'POST',
+              body: JSON.stringify(userData), // Send JSON object as string
+              headers: {
+                "Content-type": 'application/json'
+              },
+              redirect: 'follow' 
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('Signup successful!');
+              window.location.href = '/dashboard'; // Manually navigate to the dashboard page
+            } else {
+              alert('Signup failed!');
+            }
+          })
+          .catch(error => {
+              // Handle any errors
+              console.error("Error:", error);
+              alert('Signup failed!');
+          });
+      });
+  }
 });
-
-// Add event listener to the modal close button
-document.querySelector('.btn-close').addEventListener('click', function() {
-  // Close the modal
-  modal.classList.remove('show');
-});
-}
