@@ -23,9 +23,8 @@ def index():
         user_id = create_user(userdata)
 
          # Redirect to a success page or show a success message
-        return redirect('/dashboard')
-
-    return render_template('index.html')
+        return jsonify({'message': 'Signup successful!', 'showLoginModal': True})
+    return render_template('testlogin.html')
 
 @app.route('/about')
 def about():

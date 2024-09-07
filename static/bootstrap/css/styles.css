@@ -1,4 +1,5 @@
 @import 'variables.css';
+@import 'login.css';
 
 
 .hero {
@@ -116,4 +117,74 @@
    display: flexbox;
     place-items: center;
 }
+
+.login-container {
+    height: 100vh; /* Full height */
+    display: flex;
+    background-image: var(--login-image-url);
+    top: 0;
+    left: 1;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Image styling 
+.login-image {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: var(--login-image-url);
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}*/
+
+/* Image fade effect */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to right, black 0%, transparent 100%);
+}
+
+/* Form styling */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 400px;
+}
+
+.form-label, .form-check-label {
+    color: #fff;
+}
+.login-form{
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .eye-icon::before {
+    content: "\f06e"; /* Font Awesome eye icon */
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: #ccc;
+  }
 
