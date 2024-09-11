@@ -24,32 +24,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="signup-form">
+                    <form id="signup-form" method="post">
+                        {{ form.hidden_tag() }}
                         <div class="mb-3">
-                            <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" required>
+                            {{ form.fullname.label(class_='form-label') }}
+                            {{ form.fullname(class_='form-control', required=True) }}
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
+                            {{ form.email.label(class_='form-label') }}
+                            {{ form.email(class_='form-control', type='email', required=True) }}
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Password</label>
-                            <input type="email" class="form-control" id="email" required>
+                            {{ form.password.label(class_='form-label') }}
+                            {{ form.password(class_='form-control', type='password', required=True) }}
                         </div>
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" required>
+                            {{ form.phone_number.label(class_='form-label') }}
+                            {{ form.phone_number(class_='form-control', type='tel', required=True) }}
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="agreement" required>
-                            <label class="form-check-label" for="agreement"> I agree to the terms and conditions </label>
+                            {{ form.agreement.label(class_='form-check-label') }}
+                            {{ form.agreement(class_='form-check-input', required=True) }}
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" id="signup-btn">Sign up</button>
+                    {{ form.submit(class_='btn btn-danger', id='signup-btn') }}
                 </div>
     <!-- Bootstrap JS and dependencies -->
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>

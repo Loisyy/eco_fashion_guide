@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(response => {
             if (response.ok) {
               alert('Signup successful!');
+              window.location.href = 'login';
             } else {
               alert('Signup failed!');
             }
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Login form Submission */
 document.addEventListener('DOMContentLoaded', function() {
-  const logformElement = document.getElementById('loginform');
+  const logformElement = document.getElementById('login-form');
   const loginButton = document.getElementById('login-btn');
 
   // Ensure that the login button exists
@@ -63,17 +64,20 @@ document.addEventListener('DOMContentLoaded', function() {
           // Prevent default form submission behavior
           event.preventDefault();
       // Get the form field values using their IDs
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-
-
-      // Create a JSON object with the form field values
+      const email = document.getElementById('logmail').value;
+      const password = document.getElementById('logpass').value;
+       // Validate form data
+       if (!email || !password) {
+        alert('Please fill in all fields');
+          return;
+       }
+        // Create a JSON object with the form field values
       const logData = {
         'Email': email,
         'Password': password
       };
           // Send the form data to the Flask server using fetch
-          fetch('/', {
+          fetch('/login', {
               method: 'POST',
               body: JSON.stringify(logData), // Send JSON object as string
               headers: {
@@ -84,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
           .then(response => {
             if (response.ok) {
               alert('Login successful!');
-              window.location.href = '/dashboard'; // Manually navigate to the dashboard page
+              window.location.href = 'dashboard'; // Manually navigate to the dashboard page
             } else {
               alert('Login failed!');
             }
@@ -112,3 +116,15 @@ function togglePasswordVisibility() {
     eyeIcon.classList.remove('active');
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const redirectLinks = document.querySelectorAll('[data-bs-toggle="redirect"]');
+
+  redirectLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetUrl = link.getAttribute("data-bs-target");
+      window.location.href = targetUrl;
+    });
+  });
+});
