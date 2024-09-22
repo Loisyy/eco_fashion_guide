@@ -50,57 +50,52 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/* Login form Submission */
-document.addEventListener('DOMContentLoaded', function() {
-  const logformElement = document.getElementById('login-form');
-  const loginButton = document.getElementById('login-btn');
+// login.html JavaScript code
 
-  // Ensure that the login button exists
-  if (loginButton && logformElement) {
-      // Add event listener to the signup button
-      loginButton.addEventListener('click', function(event) {
-          console.log("Login button button clicked");  // Debugging to confirm the click event is working
+// Get form elements
+const loginForm = document.getElementById('login-form');
+const emailInput = document.getElementById('logmail');
+const passwordInput = document.getElementById('logpass');
 
-          // Prevent default form submission behavior
-          event.preventDefault();
-      // Get the form field values using their IDs
-      const email = document.getElementById('logmail').value;
-      const password = document.getElementById('logpass').value;
-       // Validate form data
-       if (!email || !password) {
-        alert('Please fill in all fields');
-          return;
-       }
-        // Create a JSON object with the form field values
-      const logData = {
-        'Email': email,
-        'Password': password
-      };
-          // Send the form data to the Flask server using fetch
-          fetch('/login', {
-              method: 'POST',
-              body: JSON.stringify(logData), // Send JSON object as string
-              headers: {
-                "Content-type": 'application/json'
-              },
-              redirect: 'follow' 
-          })
-          .then(response => {
-            if (response.ok) {
-              alert('Login successful!');
-              window.location.href = 'dashboard'; // Manually navigate to the dashboard page
-            } else {
-              alert('Login failed!');
-            }
-          })
-          .catch(error => {
-              // Handle any errors
-              console.error("Error:", error);
-              alert('Login failed!');
-          });
-      });
+// Add event listener to form submission
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Get input values
+  const email = emailInput.value;
+  const password = passwordInput.value;
+
+  // Validate input fields
+  if (!email || !password) {
+    alert('Please fill in all fields');
+    return;
   }
+
+  // Create JSON data object
+  const data = {
+    email,
+    password
+  };
+
+  // Fetch API request
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.status === 'success') {
+      window.location.href = '/dashboard'; // Redirect to dashboard
+    } else {
+      alert(data.message); // Display error message
+    }
+  })
+  .catch((error) => console.error('Error:', error));
 });
+
 
 
 /* eye toggler */

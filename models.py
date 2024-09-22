@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from mongoengine import connect, Document, StringField, IntField, ReferenceField, ObjectIdField
+from mongoengine import connect, Document, StringField, IntField, ReferenceField, ObjectIdField, DateTimeField
+from datetime import datetime
 from mongoengine.errors import NotUniqueError
 from flask_login import UserMixin
 from .login_manager_setup import login_manager
@@ -12,11 +13,12 @@ connect('ekofashion', host='mongodb://localhost:27017/')
 # Define the User model
 class User(UserMixin, Document):
     meta = {'collection': 'users'}
+
     fullname = StringField(max_length=64, required=True)
     email = StringField(max_length=64, unique=True, required=True)
     password_hash = StringField(max_length=128)
     phone_number = StringField(required=True)
-    role = ReferenceField('Role')
+
 
 # Use the User model to interact with the users collection
 def create_user(user_data):
@@ -33,6 +35,14 @@ def create_user(user_data):
 def get_user(email):
     return User.objects(email=email).first()
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.objects(id=user_id).first()
+
+
+# Article Model
+class Article(Document):
+    meta = {'collection': 'articles'}
+
+    title = StringField(max_length=120, required=True)
+    content = StringField(required=True)
+    author = ReferenceField(User)
+    created_at = DateTimeField(default=datetime.utcnow)
+    updated_at = DateTimeField()
