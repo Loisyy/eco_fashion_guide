@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for, flash, session
-from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_login import login_required, login_user, current_user, logout_user
 from flask_session import Session
@@ -11,7 +10,6 @@ from .login_manager_setup import login_manager
 
 app = create_app('development')
 
-CORS(app)
 
 login_manager.init_app(app)
 bcrypt = Bcrypt(app)
