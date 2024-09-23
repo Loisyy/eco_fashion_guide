@@ -7,7 +7,6 @@ from .models import create_user, get_user, User
 from .login_manager_setup import login_manager
 
 
-
 app = create_app('development')
 
 
