@@ -4,7 +4,7 @@ from mongoengine import connect, Document, StringField, IntField, ReferenceField
 from datetime import datetime
 from mongoengine.errors import NotUniqueError
 from flask_login import UserMixin
-from .login_manager_setup import login_manager
+from eco_fashion_guide.login_manager_setup import login_manager
 
 
 # Establish a connection to the MongoDB database
